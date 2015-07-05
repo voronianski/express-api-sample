@@ -1,0 +1,9 @@
+.DS_Store
+node_modules
+*.log
+*.map
+
+example
+examples
+
+doc/v1
