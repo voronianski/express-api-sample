@@ -18,6 +18,7 @@
   "license": "MIT",
   "homepage": "https://github.com/voronianski/express-api-sample",
   "dependencies": {
+    "apidoc-markdown": "^0.2.0",
     "babel": "^5.5.8",
     "bcrypt": "^0.8.3",
     "body-parser": "^1.13.1",
