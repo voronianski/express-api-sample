@@ -5,11 +5,12 @@
   "main": "bin/runServer.js",
   "scripts": {
     "nodemon": "nodemon -w ./src bin/runServer -e js,jsx,json",
-    "start-dev": "npm run doc & npm run nodemon",
-    "start": "npm run doc & node bin/runServer",
+    "start-dev": "npm run doc && npm run nodemon",
+    "start": "npm run doc && node bin/runServer",
     "test": "NODE_ENV=test node bin/runMocha",
     "test-win": "set NODE_ENV=test&& node bin/runMocha",
-    "doc": "apidoc -i ./src/v1/endpoints -o ./doc/v1"
+    "doc": "apidoc -i ./src/v1/endpoints -o ./doc/v1",
+    "doc-md": "npm run doc && apidoc-markdown -p ./doc/v1 -o DOCUMENTATION.md"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,6 @@
   "license": "MIT",
   "homepage": "https://github.com/voronianski/express-api-sample",
   "dependencies": {
-    "apidoc-markdown": "^0.2.0",
     "babel": "^5.5.8",
     "bcrypt": "^0.8.3",
     "body-parser": "^1.13.1",
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "apidoc": "^0.13.1",
+    "apidoc-markdown": "^0.2.0",
     "chai": "^3.0.0",
     "mocha": "^2.2.5",
     "sinon": "^1.15.3",
@@ -43,7 +44,7 @@
   "apidoc": {
     "name": "Express API Sample Documentation",
     "title": "Express API Sample Documentation",
-    "description": "Demo API used for the several client examples.",
+    "description": "Sample API ready to be used in different client app boilerplates and playgrounds.",
     "url": "http://localhost:8081/v1",
     "template": {
       "forceLanguage": "en"

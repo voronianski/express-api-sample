@@ -1,6 +1,6 @@
 # Express API Sample Documentation v0.0.0
 
-Demo API used for the several client examples.
+Sample API ready to be used in different client app boilerplates and playgrounds.
 
 - [Item](#item)
 	- [Create item](#create-item)
