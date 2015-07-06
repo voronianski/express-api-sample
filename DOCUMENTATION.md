@@ -10,6 +10,7 @@ Sample API ready to be used in different client app boilerplates and playgrounds
 	
 - [User](#user)
 	- [Get User](#get-user)
+	- [Get User Items](#get-user-items)
 	- [Login User](#login-user)
 	- [Signup User](#signup-user)
 	
@@ -154,6 +155,27 @@ HTTP/1.1 200 OK
      "role": "artist"
   }
 }
+```
+## Get User Items
+
+<p>Returns user with role &quot;artist&quot; created items.</p> 
+
+	GET /items
+
+
+### Success Response
+
+Success-Response
+
+```
+HTTP/1.1 200 OK
+[{
+  "_id": "T4laEftw4kF4Hjx3",
+  "owner": "john.doe@example.com",
+  "title": "Basket Case",
+  "description": "Seventh track and third single from Green Day third album, Dookie (1994).",
+  "isPublic": true
+}]
 ```
 ## Login User
 

@@ -1,6 +1,4 @@
-import Datastore from 'nedb';
-
-const items = new Datastore();
+import { items } from '../../utils/db';
 
 function create (doc) {
     return new Promise((resolve, reject) => {

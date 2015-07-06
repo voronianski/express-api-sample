@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 
 import { apiUrl } from 'c0nfig';
-import { createTestEmail } from '../testUtils';
+import { createTestEmail, getTestUser, generateItems } from '../testUtils';
 
 let request = supertest(`${apiUrl}/user`);
 let userData = {
@@ -150,6 +150,56 @@ describe('/user endpoints', () => {
                             })
                             .end(done);
                     });
+                });
+            });
+        });
+    });
+
+    describe('GET /items', () => {
+        let testUser, authHeaders;
+
+        describe('signup a new user and create some items', () => {
+            before(async done => {
+                try {
+                    let { user, accessToken } = await getTestUser();
+                    authHeaders = {'X-Access-Token': accessToken};
+                    testUser = user;
+                    done();
+                } catch (err) {
+                    done(err);
+                }
+            });
+
+            before(async done => {
+                try {
+                    await generateItems(testUser.email);
+                    done();
+                } catch (err) {
+                    done(err);
+                }
+            });
+
+            describe('when getting items and user not logged in', () => {
+                it('should return an error', done => {
+                    request
+                        .get('/items')
+                        .expect(401)
+                        .end(done);
+                });
+            });
+
+            describe('when getting items for logged in user', () => {
+                it('should return an array of items', done => {
+                    request
+                        .get('/items')
+                        .set(authHeaders)
+                        .expect(200)
+                        .expect(res => {
+                            expect(res.body).to.be.an('array');
+                            expect(res.body).to.have.length(5);
+                            expect(res.body[0].owner).to.equal(testUser.email);
+                        })
+                        .end(done);
                 });
             });
         });

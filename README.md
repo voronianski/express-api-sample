@@ -3,7 +3,7 @@
 [![build status](http://img.shields.io/travis/voronianski/express-api-sample.svg?style=flat)](https://travis-ci.org/voronianski/express-api-sample.js)
 [![Dependency Status](http://david-dm.org/voronianski/express-api-sample.svg)](http://david-dm.org/voronianski/express-api-sample)
 
-> Sample API server powered by express.js which provides login/password user authentication and basic "items" CRUD interface. It's easy to use this sample API for different playgrounds and different client app bolierplates.
+> Sample API server powered by express.js which provides login/password user authentication and basic "items" CRUD interface. It's easy to use it for different playgrounds and client app bolierplates.
 
 ## Usage
 

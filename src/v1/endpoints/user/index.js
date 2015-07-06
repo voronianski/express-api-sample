@@ -2,8 +2,9 @@ import express from 'express';
 import validate from 'is-express-schema-valid';
 
 import User from '../../models/User';
+import Item from '../../models/Item';
 import errors from '../../../utils/errors';
-import { validateAccessToken } from '../../../middleware';
+import { validateAccessToken, validateUserRole } from '../../../middleware';
 
 import {
     signupSchema,
@@ -33,6 +34,13 @@ export default function () {
         validateAccessToken,
         findUserByEmail,
         returnUser
+    );
+
+    router.get('/items',
+        validateAccessToken,
+        validateUserRole('artist'),
+        findUserItems,
+        returnItems
     );
 
     async function findUserByEmail (req, res, next) {
@@ -73,6 +81,18 @@ export default function () {
         }
     }
 
+    async function findUserItems (req, res, next) {
+        try {
+            if (!req.user) {
+                next(new errors.NotFound('User with this email is not found'));
+            }
+            req.items = await User.getArtistItems(req.email);
+            next();
+        } catch (err) {
+            next(err);
+        }
+    }
+
     async function generateAccessToken (req, res, next) {
         try {
             req.accessToken = await User.generateAccessToken(req.user.email);
@@ -80,6 +100,10 @@ export default function () {
         } catch (err) {
             next(err);
         }
+    }
+
+    function returnItems (req, res) {
+        res.json(req.items.map(Item.transformResponse));
     }
 
     function returnUser (req, res) {

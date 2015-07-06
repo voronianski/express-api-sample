@@ -1,4 +1,4 @@
-import Datastore from 'nedb';
+import { users, items } from '../../utils/db';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import moment from 'moment';
@@ -6,8 +6,6 @@ import config from 'c0nfig';
 
 const { hashRounds } = config.bcrypt;
 const { signKey, tokenTTL } = config.auth;
-
-const users = new Datastore();
 
 function create (doc) {
     return new Promise((resolve, reject) => {
@@ -98,16 +96,23 @@ function validateAccessToken (token) {
     return email;
 }
 
+function getArtistItems (owner) {
+    return new Promise((resolve, reject) => {
+        items.find({ owner }, (err, items) => {
+            err ? reject(err) : resolve(items);
+        });
+    });
+}
+
 function transformResponse (user) {
     const { email, firstName, lastName, role } = user;
     return Object.assign({}, { email, firstName, lastName, role });
 }
 
-users.ensureIndex({fieldName: 'email', unique: true});
-
 export default {
     create,
     findByEmail,
+    getArtistItems,
     comparePassword,
     generateAccessToken,
     validateAccessToken,

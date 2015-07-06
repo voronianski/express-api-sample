@@ -69,9 +69,35 @@
  * @apiVersion 0.0.0
  * @apiGroup User
  * @apiName GetUser
- * @apiPermission public
+ * @apiPermission user
  * @apiDescription Returns authenticated user info.
  *
  * @apiUse UserSuccessAuthResponseObject
+ *
+ */
+
+/**
+ * @api {get} /items Get User Items
+ * @apiVersion 0.0.0
+ * @apiGroup User
+ * @apiName GetUserItems
+ * @apiPermission user
+ * @apiDescription Returns user with role "artist" created items.
+ *
+ * @apiSuccess {Object[]} items List of user items.
+ * @apiSuccess {String} items._id Unique item id
+ * @apiSuccess {String} items.owner Artist email address
+ * @apiSuccess {String} items.title Item title text
+ * @apiSuccess {String} items.description Item description text
+ * @apiSuccess {Boolean} items.isPublic Is item visible for listeners
+ * @apiSuccessExample {json} Success-Response
+ *     HTTP/1.1 200 OK
+ *     [{
+ *       "_id": "T4laEftw4kF4Hjx3",
+ *       "owner": "john.doe@example.com",
+ *       "title": "Basket Case",
+ *       "description": "Seventh track and third single from Green Day third album, Dookie (1994).",
+ *       "isPublic": true
+ *     }]
  *
  */
