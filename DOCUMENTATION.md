@@ -137,7 +137,7 @@ HTTP/1.1 200 OK
 
 <p>Returns authenticated user info.</p> 
 
-	GET /me
+	GET /user/me
 
 
 ### Success Response
@@ -160,7 +160,7 @@ HTTP/1.1 200 OK
 
 <p>Returns user with role &quot;artist&quot; created items.</p> 
 
-	GET /items
+	GET /user/items
 
 
 ### Success Response

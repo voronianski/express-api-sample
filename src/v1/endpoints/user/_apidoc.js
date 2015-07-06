@@ -65,7 +65,7 @@
  */
 
 /**
- * @api {get} /me Get User
+ * @api {get} /user/me Get User
  * @apiVersion 0.0.0
  * @apiGroup User
  * @apiName GetUser
@@ -77,7 +77,7 @@
  */
 
 /**
- * @api {get} /items Get User Items
+ * @api {get} /user/items Get User Items
  * @apiVersion 0.0.0
  * @apiGroup User
  * @apiName GetUserItems
