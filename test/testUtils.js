@@ -6,13 +6,13 @@ export function createTestEmail () {
     return moment().valueOf() + '@tests.com';
 }
 
-export async function getTestUser (role) {
+export async function getTestUser (role = 'artist') {
     const user = await User.create({
         email: createTestEmail(),
         password: 'qwerty',
         firstName: 'John',
         lastName: 'Doe',
-        role: role || 'artist'
+        role
     });
     const accessToken = User.generateAccessToken(user.email);
     return { accessToken, user };
@@ -27,9 +27,7 @@ export function generateAccessToken () {
     return User.generateAccessToken(createTestEmail());
 }
 
-export async function generateItems (email, num) {
-    num = num || 5;
-
+export async function generateItems (email, num = 5) {
     for (let i = 0; i < num; i++) {
         await Item.create({
             owner: email,
