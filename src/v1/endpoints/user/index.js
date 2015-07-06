@@ -56,7 +56,7 @@ export default function () {
     async function signupUser (req, res, next) {
         try {
             if (req.user) {
-                next(new errors.BadRequest('Email is already registered'));
+                return next(new errors.BadRequest('Email is already registered'));
             }
             req.user = await User.create(req.body);
             next();
@@ -68,12 +68,12 @@ export default function () {
     async function loginUser (req, res, next) {
         try {
             if (!req.user) {
-                next(new errors.NotFound('User with this email is not found'));
+                return next(new errors.NotFound('User with this email is not found'));
             }
 
             const same = await User.comparePassword(req.body.password, req.user.password);
             if (!same) {
-                next(new errors.BadRequest('Password is not matching email address'));
+                return next(new errors.BadRequest('Password is not matching email address'));
             }
             next();
         } catch (err) {
@@ -84,7 +84,7 @@ export default function () {
     async function findUserItems (req, res, next) {
         try {
             if (!req.user) {
-                next(new errors.NotFound('User with this email is not found'));
+                return next(new errors.NotFound('User with this email is not found'));
             }
             req.items = await Item.getArtistItems(req.email);
             next();
