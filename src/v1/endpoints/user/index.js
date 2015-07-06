@@ -86,7 +86,7 @@ export default function () {
             if (!req.user) {
                 next(new errors.NotFound('User with this email is not found'));
             }
-            req.items = await User.getArtistItems(req.email);
+            req.items = await Item.getArtistItems(req.email);
             next();
         } catch (err) {
             next(err);

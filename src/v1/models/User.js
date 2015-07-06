@@ -1,4 +1,4 @@
-import { users, items } from '../../utils/db';
+import { users } from '../../utils/db';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import moment from 'moment';
@@ -96,14 +96,6 @@ function validateAccessToken (token) {
     return email;
 }
 
-function getArtistItems (owner) {
-    return new Promise((resolve, reject) => {
-        items.find({ owner }, (err, items) => {
-            err ? reject(err) : resolve(items);
-        });
-    });
-}
-
 function transformResponse (user) {
     const { email, firstName, lastName, role } = user;
     return Object.assign({}, { email, firstName, lastName, role });
@@ -112,7 +104,6 @@ function transformResponse (user) {
 export default {
     create,
     findByEmail,
-    getArtistItems,
     comparePassword,
     generateAccessToken,
     validateAccessToken,

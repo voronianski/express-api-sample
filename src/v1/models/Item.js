@@ -37,6 +37,14 @@ function remove (_id) {
     });
 }
 
+function getArtistItems (owner) {
+    return new Promise((resolve, reject) => {
+        items.find({ owner }, (err, items) => {
+            err ? reject(err) : resolve(items);
+        });
+    });
+}
+
 function transformResponse (item) {
     const { _id, owner, title, description, isPublic } = item;
     return Object.assign({}, { _id, owner, title, description, isPublic });
@@ -47,5 +55,6 @@ export default {
     findById,
     update,
     remove,
+    getArtistItems,
     transformResponse
 };
