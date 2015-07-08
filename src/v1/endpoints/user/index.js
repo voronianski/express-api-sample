@@ -68,7 +68,7 @@ export default function () {
     async function loginUser (req, res, next) {
         try {
             if (!req.user) {
-                return next(new errors.NotFound('User with this email is not found'));
+                return next();
             }
 
             const same = await User.comparePassword(req.body.password, req.user.password);
@@ -84,8 +84,9 @@ export default function () {
     async function findUserItems (req, res, next) {
         try {
             if (!req.user) {
-                return next(new errors.NotFound('User with this email is not found'));
+                return next();
             }
+
             req.items = await Item.getArtistItems(req.email);
             next();
         } catch (err) {
@@ -95,6 +96,10 @@ export default function () {
 
     async function generateAccessToken (req, res, next) {
         try {
+            if (!req.user) {
+                return next();
+            }
+
             req.accessToken = await User.generateAccessToken(req.user.email);
             next();
         } catch (err) {
@@ -106,7 +111,10 @@ export default function () {
         res.json(req.items.map(Item.transformResponse));
     }
 
-    function returnUser (req, res) {
+    function returnUser (req, res, next) {
+        if (!req.user) {
+            return next(new errors.NotFound('User with this email is not found'));
+        }
         const user = User.transformResponse(req.user);
         const data = req.accessToken ? { accessToken: req.accessToken, user } : user;
         res.json(data);
