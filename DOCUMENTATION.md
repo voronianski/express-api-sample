@@ -4,8 +4,6 @@
 
 ## Create item
 
-<p>Creates new artist's item. Only artists can add items.</p> 
-
 	POST /items
 
 ### Headers
