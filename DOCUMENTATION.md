@@ -1,21 +1,5 @@
 # Express API Sample Documentation v0.0.0
 
-Sample API ready to be used in different client app boilerplates and playgrounds.
-
-- [Item](#item)
-	- [Create item](#create-item)
-	- [Delete item](#delete-item)
-	- [Read item](#read-item)
-	- [Update item](#update-item)
-	
-- [User](#user)
-	- [Get User](#get-user)
-	- [Get User Items](#get-user-items)
-	- [Login User](#login-user)
-	- [Signup User](#signup-user)
-	
-
-
 # Item
 
 ## Create item
