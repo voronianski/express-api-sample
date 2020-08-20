@@ -20,7 +20,7 @@
   "homepage": "https://github.com/voronianski/express-api-sample",
   "dependencies": {
     "babel": "^5.5.8",
-    "bcrypt": "^0.8.3",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.13.1",
     "c0nfig": "^0.2.2",
     "cookie-parser": "^1.3.5",
